@@ -1,0 +1,14 @@
+{% extends 'Registro/base.html' %} 
+
+{% block content %}
+    <div class="text-center">
+        <form method="post">
+            {% csrf_token %}
+
+            <p class="delete-msg">¿Estas seguro que quieres eliminar a {{ object.nombreCompleto }}?</p>
+
+            <a href="{% url 'listar_actores' %}" class="btn btn-secondary">NO</a>
+            <button class="btn btn-primary" type="submit">Si</button>
+        </form>
+    </div>
+{% endblock %}

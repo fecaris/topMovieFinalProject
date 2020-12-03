@@ -1,0 +1,133 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+
+    {% block extrastatic %}
+    {% endblock %}
+    <link rel="stylesheet" href='/static/css/index.css'>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <title>{% block title %}Usuario {% endblock %}</title>
+</head>
+
+<body>
+<div class="container">
+    <nav class="navbar navbar-expand-lg   navbar-light" style="background-color: rgb(199, 23, 32);">
+        <a href="http://localhost:8000/" class="navbar-brand" style="font-family: Georgia, 'Times New Roman', Times, serif;">
+            TopMovie
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Menu
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="http://localhost:8000/registro/top2020">Top Movie 2020</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="http://localhost:8000/registro/noticias">Noticias</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#footer">Acerca de nosotros</a>
+                </li>
+                {% if user.is_authenticated%}
+                {% if user.is_superuser == 1 %}
+                <li class="nav-item">
+                    <a class="nav-link" href="http://localhost:8000/usuario/listar"> ADMINISTRAR</a>
+                </li>
+                {% endif %}
+                {% endif %}
+            </ul>
+        </div>
+
+        <div class="registro">
+            <ul class="navbar-nav">
+                {% if user.is_authenticated %}
+                <p>Usuario : {{user.first_name}} {{user.last_name}}</p>
+                <br><br>
+                <li><a href="{% url 'logout' %}" class="boton_2" style="text-decoration:none">logout</a></li>
+                {% else %}
+                <li><a href="{% url 'registrar' %}" class="boton_1" style="text-decoration:none">Registrarse</a></li>
+                <li><a href="{% url 'login' %}" class="boton_2" style="text-decoration:none">Iniciar</a></li>
+                {% endif %}
+
+            </ul>
+        </div>
+    </nav>
+    
+    {% block content %}
+    <h4>    Bloque de contenido     </h4>
+    {% endblock %}
+
+    {% block footer %}
+    <footer id="footer">
+        <div class="container_full">
+            <div class="container_body">
+                <div class="colum1">
+                    <h1>Informacion sobre Nuestra pagina</h1>
+                    <p>Esta pagina se dedica a mostrar TOP de peliculas por año, asi como mostrar noticias del
+                        espectaculo
+                        actual.</p>
+                </div>
+                <div class="colum2">
+                    <h1>Redes Sociales</h1>
+                    <div class="filas">
+                        <a href="https://www.facebook.com/" target="_blank"><img src="/static/images/logofacebook.png"
+                                alt="imagen" width="28" height="28"><label>Siguenos en Facebook</label></a>
+                    </div>
+                    <div class="filas">
+                        <a class="instagram" href="https://www.instagram.com/?hl=es-la" target="_blank"><img
+                                src="/static/images/logoinsta.png" width="28" height="28"><label>Siguenos en
+                                Instagram</label></a>
+                    </div>
+                    <div class="filas">
+                        <a class="twitter" href="https://twitter.com/?lang=es" target="_blank"><img
+                                src="/static/images/logotwitter.png" width="28" height="28"><label>Siguenos en
+                                Twitter</label></a>
+                    </div>
+                    <div class="filas">
+                        <a class="pinterest" href="https://www.pinterest.cl/" target="_blank"><img
+                                src="/static/images/logopinterest.png" width="28" height="28"><label>Siguenos en
+                                Pinterest</label></a>
+                    </div>
+                </div>
+                <div class="colum3">
+                    <h1>Contacto</h1>
+                    <div class="filas2">
+                        <img src="/static/images/logocasita.png" width="28" height="28">
+                        <label>Sede central en Avenida Siempreviva 742</label>
+                    </div>
+                    <div class="filas2">
+                        <img src="/static/images/logotelefono.png" width="28" height="28">
+                        <label>+569 123456</label>
+                    </div>
+                    <div class="filas2">
+                        <a class="gmail" href="https://www.google.com/intl/es-419/gmail/about/" target="blank"><img
+                                src="/static/images/logogmail.png" width="28"
+                                height="28"><label>TOPMOVIES@GMAIL.COM</label></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    {% endblock%}
+</div>
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+    {% block extrajs %}
+    {% endblock %}
+
+</body>
+</html>

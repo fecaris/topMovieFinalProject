@@ -1,0 +1,27 @@
+{% extends 'Usuario/base/base.html' %} 
+
+{% block titulo_principal %} Lista de usuarios{% endblock %}
+
+{% block content %}
+<script> contador = 0 </script>
+{% if object_list %}
+        {% for user in object_list %}
+        {% if user.is_superuser != 1 %}
+            <p>Nombre: {{ user.username }}</p>
+            <p>email: {{ user.email }}</p>
+            <a class="btn btn-primary" href="{% url 'editar_user' user.id %}">Editar</a>
+            <a class="btn btn-danger" href="{% url 'borrar_user' user.id %}">Eliminar</a>
+            <script> contador = contador+1 </script>
+            <br>
+        {% endif %}
+        {% endfor %}
+        
+        {% else %}
+        <h1>No hay registros de user</h1>
+        {% endif %}
+
+{% endblock %}
+
+
+
+

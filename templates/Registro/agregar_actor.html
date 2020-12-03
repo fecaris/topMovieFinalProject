@@ -1,0 +1,14 @@
+{% extends 'Registro/base.html' %} 
+
+<!DOCTYPE html>
+<html lang="en">
+
+{% block content %}
+    <div class="container">
+        <h1>Agregar Actor</h1>
+        <form method="POST">
+            {% csrf_token %} {{ form.as_table }}
+            <button type="submit">GRABAR</button>
+        </form>
+    </div>
+{% endblock %}
